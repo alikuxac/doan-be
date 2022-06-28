@@ -11,6 +11,7 @@ import { UsersModule } from '../users/users.module';
 import { AuthModule } from '../auth/auth.module';
 import { MailModule } from '../mail/mail.module';
 import { SharedModule } from '../shared/shared.module';
+import { RapidapiModule } from '../rapidapi/rapidapi.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -57,6 +58,7 @@ import { SharedModule } from '../shared/shared.module';
     AuthModule,
     MailModule,
     SharedModule,
+    RapidapiModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -33,7 +33,7 @@ export class MailService {
   async sendResetPassword(email: string) {
     const passcode = nanoid();
     await this.redisService.setPasscode(email, passcode);
-    return this.transporter.sendMail({
+    return await this.transporter.sendMail({
       from: this.configService.get('MAIL_FROM'),
       to: email,
       subject: 'Reset Password',

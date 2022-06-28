@@ -17,8 +17,8 @@ export class RapidapiService {
 
   private headers() {
     return {
-      'X-RapidAPI-Key': this.configService.get('X-RapidAPI-Key'),
-      'X-RapidAPI-Host': this.configService.get('X-RapidAPI-Host'),
+      'X-RapidAPI-Key': this.configService.get('X_RAPIDAPI_KEY'),
+      'X-RapidAPI-Host': this.configService.get('X_RAPIDAPI_HOST'),
     };
   }
 

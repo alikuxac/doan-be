@@ -29,7 +29,7 @@ export class RapidapiService {
         location: dto.lat && dto.lng ? `${dto.lat},${dto.lng}` : '',
         radius: '500',
         type: 'cafe',
-        opennow: dto.isOpenNow ? 'true' : 'false',
+        opennow: dto.isOpenNow ? true : false,
         keyword: dto.keyword ? dto.keyword : '',
         language: 'vi',
       },

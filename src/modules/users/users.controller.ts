@@ -44,22 +44,28 @@ export class UsersController {
   }
 
   @Get(':id/favorites')
-  getAllFavorite(@Param('id') id: string) {
-    return this.usersService.getAllFavorite(+id);
+  async getAllFavorite(@Param('id') id: string) {
+    return await this.usersService.getAllFavorite(+id);
   }
 
   @Post(':id/favorites')
-  addFavorite(@Param('id') id: string, @Body() dto: CreateFavoriteDto) {
-    return this.usersService.addFavorite(+id, dto);
+  async addFavorite(@Param('id') id: string, @Body() dto: CreateFavoriteDto) {
+    return await this.usersService.addFavorite(+id, dto);
   }
 
   @Patch(':id/favorites')
-  updateFavorite(@Param('id') id: string, @Body() dto: UpdateFavoriteDto) {
-    return this.usersService.updateFavorite(+id, dto);
+  async updateFavorite(
+    @Param('id') id: string,
+    @Body() dto: UpdateFavoriteDto,
+  ) {
+    return await this.usersService.updateFavorite(+id, dto);
   }
 
   @Delete(':id/favorites')
-  deleteFavorite(@Param('id') id: string, @Body() dto: DeleteFavoriteDto) {
-    return this.usersService.deleteFavorite(+id, dto.timestammp);
+  async deleteFavorite(
+    @Param('id') id: string,
+    @Body() dto: DeleteFavoriteDto,
+  ) {
+    return await this.usersService.deleteFavorite(+id, dto.timestammp);
   }
 }

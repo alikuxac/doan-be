@@ -98,16 +98,8 @@ export class UsersService {
       address: dto.address,
       createAt: Date.now(),
     });
-    this.userRepository
-      .save(user)
-      .then(async () => {
-        const data = await this.findOneById(id);
-        delete data.password;
-        return data;
-      })
-      .catch((err) => {
-        return err;
-      });
+    const saveResult = await this.userRepository.save(user);
+    return saveResult;
   }
 
   async updateFavorite(id: number, dto: UpdateFavoriteDto) {
@@ -137,16 +129,8 @@ export class UsersService {
     const index = user.favorites.indexOf(favorite);
     user.favorites[index] = favorite;
 
-    this.userRepository
-      .save(user)
-      .then(async () => {
-        const data = await this.findOneById(id);
-        delete data.password;
-        return data;
-      })
-      .catch((err) => {
-        return err;
-      });
+    const saveResult = await this.userRepository.save(user);
+    return saveResult;
   }
 
   async deleteFavorite(id: number, createAt: number) {
@@ -163,15 +147,7 @@ export class UsersService {
     user.favorites = user.favorites.filter(
       (favorite) => favorite.createAt !== createAt,
     );
-    this.userRepository
-      .save(user)
-      .then(async () => {
-        const data = await this.findOneById(id);
-        delete data.password;
-        return data;
-      })
-      .catch((err) => {
-        return err;
-      });
+    const saveResult = await this.userRepository.save(user);
+    return saveResult;
   }
 }

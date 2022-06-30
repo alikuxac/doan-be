@@ -98,7 +98,15 @@ export class UsersService {
       address: dto.address,
       createAt: Date.now(),
     });
-    return await this.userRepository.save(user);
+    this.userRepository
+      .save(user)
+      .then((res) => {
+        delete res.password;
+        return res;
+      })
+      .catch((err) => {
+        return err;
+      });
   }
 
   async updateFavorite(id: number, dto: UpdateFavoriteDto) {
@@ -124,7 +132,19 @@ export class UsersService {
     favorite.lat = favorite.lat ?? dto.lat;
     favorite.lng = favorite.lng ?? dto.lng;
     favorite.address = favorite.address ?? dto.address;
-    return await this.userRepository.save(user);
+
+    const index = user.favorites.indexOf(favorite);
+    user.favorites[index] = favorite;
+
+    this.userRepository
+      .save(user)
+      .then((res) => {
+        delete res.password;
+        return res;
+      })
+      .catch((err) => {
+        return err;
+      });
   }
 
   async deleteFavorite(id: number, createAt: number) {
@@ -141,6 +161,14 @@ export class UsersService {
     user.favorites = user.favorites.filter(
       (favorite) => favorite.createAt !== createAt,
     );
-    return await this.userRepository.save(user);
+    this.userRepository
+      .save(user)
+      .then((res) => {
+        delete res.password;
+        return res;
+      })
+      .catch((err) => {
+        return err;
+      });
   }
 }

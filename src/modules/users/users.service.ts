@@ -128,10 +128,10 @@ export class UsersService {
       const firstLatLng = latlngArray[0];
       dto.address = firstLatLng.formattedAddress;
     }
-    favorite.name = favorite.name ?? dto.name;
-    favorite.lat = favorite.lat ?? dto.lat;
-    favorite.lng = favorite.lng ?? dto.lng;
-    favorite.address = favorite.address ?? dto.address;
+    favorite.name = dto.name;
+    favorite.lat = dto.lat;
+    favorite.lng = dto.lng;
+    favorite.address = dto.address;
 
     const index = user.favorites.indexOf(favorite);
     user.favorites[index] = favorite;

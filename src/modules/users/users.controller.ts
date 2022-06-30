@@ -12,7 +12,6 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { CreateFavoriteDto } from './dto/create-favorite.dto';
 import { UpdateFavoriteDto } from './dto/update-favorite.dto';
-import { DeleteFavoriteDto } from './dto/delete-favorite.dto';
 
 @Controller('users')
 export class UsersController {
@@ -61,11 +60,11 @@ export class UsersController {
     return await this.usersService.updateFavorite(+id, dto);
   }
 
-  @Delete(':id/favorites')
+  @Delete(':id/favorites/:timestamps')
   async deleteFavorite(
     @Param('id') id: string,
-    @Body() dto: DeleteFavoriteDto,
+    @Param('timestamps') timestamps: string,
   ) {
-    return await this.usersService.deleteFavorite(+id, dto.timestammp);
+    return await this.usersService.deleteFavorite(+id, +timestamps);
   }
 }

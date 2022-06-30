@@ -100,9 +100,10 @@ export class UsersService {
     });
     this.userRepository
       .save(user)
-      .then((res) => {
-        delete res.password;
-        return res;
+      .then(async () => {
+        const data = await this.findOneById(id);
+        delete data.password;
+        return data;
       })
       .catch((err) => {
         return err;
@@ -138,9 +139,10 @@ export class UsersService {
 
     this.userRepository
       .save(user)
-      .then((res) => {
-        delete res.password;
-        return res;
+      .then(async () => {
+        const data = await this.findOneById(id);
+        delete data.password;
+        return data;
       })
       .catch((err) => {
         return err;
@@ -163,9 +165,10 @@ export class UsersService {
     );
     this.userRepository
       .save(user)
-      .then((res) => {
-        delete res.password;
-        return res;
+      .then(async () => {
+        const data = await this.findOneById(id);
+        delete data.password;
+        return data;
       })
       .catch((err) => {
         return err;

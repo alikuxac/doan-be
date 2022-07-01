@@ -10,6 +10,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { CreateFavoriteDto } from './dto/create-favorite.dto';
 import { UpdateFavoriteDto } from './dto/update-favorite.dto';
+import { UpdatePassDto } from './dto/update-pass.dto';
 
 @Injectable()
 export class UsersService {
@@ -69,6 +70,19 @@ export class UsersService {
     }
     const newPass = await bcrypt.hash(password, 10);
     return await this.userRepository.update(user.id, { password: newPass });
+  }
+
+  async updateNewPassword(dto: UpdatePassDto) {
+    const user = await this.findOneByEmail(dto.email);
+    if (!user) {
+      throw new ConflictException('User does not exist');
+    }
+    if (!user.comparePassword(dto.oldPassword)) {
+      throw new ConflictException('Wrong password');
+    }
+    const newPass = await bcrypt.hash(dto.newPassword, 10);
+    await this.userRepository.update(user.id, { password: newPass });
+    return await this.findOneByEmail(dto.email);
   }
 
   // Favorite

@@ -10,5 +10,10 @@ export class UpdatePassDto {
   @IsString()
   @ApiProperty()
   @IsNotEmpty()
-  password: string;
+  oldPassword: string;
+
+  @IsString()
+  @ApiProperty()
+  @IsNotEmpty()
+  newPassword: string;
 }

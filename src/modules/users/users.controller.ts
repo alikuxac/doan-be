@@ -45,7 +45,7 @@ export class UsersController {
 
   @Patch(':id/password')
   async updatePassword(@Body() dto: UpdatePassDto) {
-    return await this.usersService.updatePassword(dto.email, dto.password);
+    return await this.usersService.updateNewPassword(dto);
   }
 
   @Get(':id/favorites')
